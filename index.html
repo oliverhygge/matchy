@@ -1,1 +1,209 @@
 
+<!DOCTYPE html>
+<html lang="da">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#170f25">
+  <title>Matchy – Mød nye mennesker</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      color: white;
+      background: #170f25;
+    }
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 20px 7%;
+      border-bottom: 1px solid #ffffff18;
+    }
+    .logo {
+      font-size: 30px;
+      font-weight: 800;
+      letter-spacing: -1px;
+    }
+    .logo span { color: #ff61b6; }
+    button {
+      border: 0;
+      border-radius: 24px;
+      padding: 13px 20px;
+      font-weight: bold;
+      cursor: pointer;
+      font-size: 15px;
+    }
+    .secondary { background: #30233f; color: white; }
+    .primary {
+      background: linear-gradient(110deg, #ff58b1, #a56bff);
+      color: white;
+    }
+    main {
+      width: min(1050px, 90%);
+      margin: auto;
+    }
+    .hero {
+      text-align: center;
+      padding: 80px 0 45px;
+    }
+    .tag {
+      display: inline-block;
+      background: #ffffff10;
+      border: 1px solid #ffffff20;
+      border-radius: 30px;
+      padding: 9px 15px;
+      color: #ffadd8;
+    }
+    h1 {
+      font-size: clamp(42px, 7vw, 76px);
+      line-height: 1.04;
+      letter-spacing: -3px;
+      margin: 25px 0;
+    }
+    h1 span {
+      background: linear-gradient(90deg, #ff72bf, #b994ff);
+      color: transparent;
+      background-clip: text;
+    }
+    .intro {
+      max-width: 590px;
+      margin: auto;
+      color: #c9bfd5;
+      font-size: 18px;
+      line-height: 1.7;
+    }
+    .actions {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 28px;
+    }
+    .note {
+      color: #a99bb9;
+      font-size: 13px;
+      margin-top: 18px;
+    }
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      padding: 20px 0 65px;
+    }
+    .feature {
+      background: #ffffff08;
+      border: 1px solid #ffffff14;
+      border-radius: 20px;
+      padding: 24px;
+    }
+    .emoji { font-size: 30px; }
+    .feature h2 { font-size: 19px; }
+    .feature p {
+      color: #bdb1ca;
+      line-height: 1.6;
+      font-size: 14px;
+    }
+    footer {
+      text-align: center;
+      padding: 25px;
+      color: #a99bb9;
+      border-top: 1px solid #ffffff18;
+      font-size: 13px;
+    }
+    dialog {
+      width: min(420px, calc(100% - 30px));
+      background: #241832;
+      color: white;
+      border: 1px solid #ffffff25;
+      border-radius: 20px;
+      padding: 25px;
+    }
+    dialog::backdrop { background: #08040dcc; }
+    dialog h2 { margin-top: 0; }
+    dialog p { color: #c9bfd5; line-height: 1.5; }
+    .close { float: right; }
+    @media (max-width: 500px) {
+      header { padding: 16px 5%; }
+      .logo { font-size: 26px; }
+      header button { padding: 11px 13px; }
+      .hero { padding-top: 60px; }
+      h1 { letter-spacing: -1.5px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">match<span>y.</span></div>
+    <button class="secondary" onclick="showInfo('login')">Log ind</button>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="tag">💗 Din næste historie begynder her</div>
+      <h1>Mød mennesker.<br><span>Vær dig selv.</span></h1>
+      <p class="intro">
+        Et nyt sted at møde mennesker, opdage fælles interesser
+        og skabe ægte forbindelser.
+      </p>
+      <div class="actions">
+        <button class="primary" onclick="showInfo('signup')">
+          Kom i gang gratis →
+        </button>
+        <button class="secondary" onclick="showInfo('login')">
+          Jeg har allerede en konto
+        </button>
+      </div>
+      <p class="note">Gratis at starte · Bygget med fokus på privatliv</p>
+    </section>
+
+    <section class="features">
+      <article class="feature">
+        <div class="emoji">✨</div>
+        <h2>Vær dig selv</h2>
+        <p>Lav en profil, der viser dine interesser og det, du holder af.</p>
+      </article>
+      <article class="feature">
+        <div class="emoji">💜</div>
+        <h2>Find fælles interesser</h2>
+        <p>Opdag mennesker, som du måske har noget til fælles med.</p>
+      </article>
+      <article class="feature">
+        <div class="emoji">🛡️</div>
+        <h2>Dit privatliv betyder noget</h2>
+        <p>Vi vil bygge sikkerhed, blokering og rapportering ind, før Matchy åbner for brugere.</p>
+      </article>
+    </section>
+  </main>
+
+  <dialog id="info">
+    <button class="secondary close" onclick="document.getElementById('info').close()">Luk ✕</button>
+    <h2 id="dialogTitle">Velkommen til Matchy</h2>
+    <p id="dialogText"></p>
+    <p>Konti og login bliver først aktiveret, når den sikre database er tilsluttet.</p>
+  </dialog>
+
+  <footer>© <span id="year"></span> Matchy · En ny måde at møde mennesker på</footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    function showInfo(type) {
+      const title = document.getElementById('dialogTitle');
+      const text = document.getElementById('dialogText');
+
+      if (type === 'signup') {
+        title.textContent = 'Opret din konto';
+        text.textContent = 'Vi gør tilmeldingen klar, så du kan oprette en rigtig konto, når login er sat sikkert op.';
+      } else {
+        title.textContent = 'Log ind på Matchy';
+        text.textContent = 'Rigtigt login bliver tilsluttet i næste trin.';
+      }
+
+      document.getElementById('info').showModal();
+    }
+  </script>
+</body>
+</html>
